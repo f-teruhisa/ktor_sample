@@ -9,7 +9,7 @@ class DAOFacadeImpl : DAOFacade {
 	private fun resultRowToArticle(row: ResultRow) = Article(
 		id = row[Articles.id],
 		title = row[Articles.title],
-		body = row[Articles.body]
+		body = row[Articles.body],
 	)
 	
 	override suspend fun allArticles(): List<Article> = dbQuery {
@@ -41,12 +41,12 @@ class DAOFacadeImpl : DAOFacade {
 	override suspend fun deleteArticle(id: Int): Boolean = dbQuery {
 		Articles.deleteWhere { Articles.id eq id } > 0
 	}
-	
-	val dao: DAOFacade = DAOFacadeImpl().apply {
-		runBlocking {
-			if(allArticles().isEmpty()) {
-				addNewArticle("The drive to develop!", "...it's what keeps me going.")
-			}
+}
+
+val dao: DAOFacade = DAOFacadeImpl().apply {
+	runBlocking {
+		if(allArticles().isEmpty()) {
+			addNewArticle("The drive to develop!", "...it's what keeps me going.")
 		}
 	}
 }
