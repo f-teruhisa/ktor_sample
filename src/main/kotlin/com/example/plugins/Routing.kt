@@ -2,6 +2,7 @@ package com.example.plugins
 
 import com.example.dao.dao
 import com.example.controller.*
+import com.example.models.*
 import io.ktor.server.application.*
 import io.ktor.server.freemarker.*
 import io.ktor.server.http.content.*
@@ -15,6 +16,12 @@ fun Application.configureRouting() {
         static("/static") {
             resources("files")
         }
+        
+        get("/index") {
+            val sampleUser = User(1, "John")
+            call.respond(FreeMarkerContent("index.ftl", mapOf("user" to sampleUser)))
+        }
+        
         get("/") {
             call.respondRedirect("articles")
         }
