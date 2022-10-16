@@ -28,10 +28,10 @@ fun Application.configureRouting() {
         
         route("articles") {
             get {
-                call.respond(FreeMarkerContent("index.ftl", mapOf("articles" to dao.allArticles())))
+                call.respond(FreeMarkerContent("articles/index.ftl", mapOf("articles" to dao.allArticles())))
             }
             get("new") {
-                call.respond(FreeMarkerContent("new.ftl", model = null))
+                call.respond(FreeMarkerContent("articles/new.ftl", model = null))
             }
             post {
                 val formParameters = call.receiveParameters()
@@ -42,11 +42,11 @@ fun Application.configureRouting() {
             }
             get("{id}") {
                 val id = call.parameters.getOrFail<Int>("id").toInt()
-                call.respond(FreeMarkerContent("show.ftl", mapOf("article" to dao.article(id))))
+                call.respond(FreeMarkerContent("articles/show.ftl", mapOf("article" to dao.article(id))))
             }
             get("{id}/edit") {
                 val id = call.parameters.getOrFail<Int>("id").toInt()
-                call.respond(FreeMarkerContent("edit.ftl", mapOf("article" to dao.article(id))))
+                call.respond(FreeMarkerContent("articles/edit.ftl", mapOf("article" to dao.article(id))))
             }
             post("{id}") {
                 val id = call.parameters.getOrFail<Int>("id").toInt()
