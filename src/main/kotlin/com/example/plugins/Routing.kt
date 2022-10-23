@@ -13,6 +13,10 @@ import io.ktor.server.util.*
 
 fun Application.configureRouting() {
     routing {
+        get("/") {
+            call.respondText("Hello World!")
+        }
+        
         static("/static") {
             resources("files")
         }
@@ -20,10 +24,6 @@ fun Application.configureRouting() {
         get("/index") {
             val sampleUser = User(1, "John")
             call.respond(FreeMarkerContent("index.ftl", mapOf("user" to sampleUser)))
-        }
-        
-        get("/") {
-            call.respondRedirect("articles")
         }
         
         route("articles") {
