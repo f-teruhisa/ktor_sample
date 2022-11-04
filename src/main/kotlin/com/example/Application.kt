@@ -15,5 +15,6 @@ fun main() {
             templateLoader = ClassTemplateLoader(this::class.java.classLoader, "templates")
         }
         configureRouting()
+        configureSerialization()
     }.start(wait = true)
 }
