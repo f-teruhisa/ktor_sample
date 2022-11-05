@@ -1,6 +1,7 @@
 package com.example.plugins
 
 import com.example.controller.*
+import com.example.routes.*
 import com.example.models.*
 import io.ktor.server.application.*
 import io.ktor.server.freemarker.*
@@ -26,6 +27,7 @@ fun Application.configureRouting() {
     routing {
         articleController()
         userController()
+        customerRouting()
     }
 }
 
